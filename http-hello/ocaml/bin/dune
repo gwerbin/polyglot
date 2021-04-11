@@ -1,0 +1,3 @@
+(executable
+  (name http_hello)
+  (libraries httpaf httpaf-lwt-unix base stdio lwt lwt.unix))
