@@ -2,7 +2,6 @@
 # * `Time.local` already returns the requested time format (cool!)
 # * Nontrivial OptionParser boilerplate with respect to error handling.
 
-
 require "http/server"
 require "json"
 require "log"
@@ -26,7 +25,7 @@ class Handler
     response_data = {
       "time" => Time.local(),
       "datum" => [
-        "eAcute is é, combinedEAcute is é; precomposed is 한, decomposed is 한",
+        "eAcute is \u{E9}, combinedEAcute is \u{65}\u{301}; precomposed is \u{D55C}, decomposed is \u{1112}\u{1161}\u{11AB}",
         10000000,
         nil,
         [0, 0.0],
@@ -49,8 +48,13 @@ end
 
 def make_server(options)
   delay = options.delay
-  if (delay < 0.0) | (delay > 5.0)
-    raise ArgumentError.new("Invalid delay: #{delay}.")
+
+  if (delay < 0.0)
+    raise ArgumentError.new("Delay cannot be negative")
+  end
+
+  if (delay > 5.0)
+    raise ArgumentError.new("Delay is too long: #{delay}")
   end
 
   return HTTP::Server.new Handler.new(options.delay)
@@ -91,10 +95,12 @@ def parse_cli
   end
 
   options = ServerOptions.new
-  begin
-    options.delay = delay.to_f
-  rescue e : ArgumentError
-    die 1, "Invalid delay value: #{delay}."
+  if delay.size() > 0
+	  begin
+      options.delay = delay.to_f
+	  rescue e : ArgumentError
+      die 1, "Invalid value for --delay: #{delay}."
+	  end
   end
 
   return options
@@ -115,6 +121,6 @@ rescue e : IndexError
 	die 1, "No port number provided."
 end
 
-puts "Listening on http://#{address}, with request delay #{options.delay} seconds."
+puts "Listening for HTTP requests at #{address}, with request delay #{options.delay} seconds."
 server.listen
 
