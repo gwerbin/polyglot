@@ -109,7 +109,12 @@ rescue e : ArgumentError
   die 1, e
 end
 
-address = server.bind_tcp ARGV[0].to_i
+begin
+	address = server.bind_tcp ARGV[0].to_i
+rescue e : IndexError
+	die 1, "No port number provided."
+end
+
 puts "Listening on http://#{address}, with request delay #{options.delay} seconds."
 server.listen
 
