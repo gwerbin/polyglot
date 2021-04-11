@@ -1,6 +1,6 @@
 # NOTES:
 # * `Time.local` already returns the requested time format (cool!)
-# * Nontrivial OptionParser boilerplate.
+# * Nontrivial OptionParser boilerplate with respect to error handling.
 
 
 require "http/server"
