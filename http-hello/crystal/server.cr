@@ -14,6 +14,25 @@ def die(status, msg)
 end
 
 
+silly_data = {
+  "time" => Time.local(),
+  "datum" => [
+    "eAcute is \u{E9}, combinedEAcute is \u{65}\u{301}; precomposed is \u{D55C}, decomposed is \u{1112}\u{1161}\u{11AB}",
+    10000000,
+    nil,
+    [0, 0.0],
+  ]
+}
+
+
+def respond_json(context, data)
+  payload = data.to_json.to_slice
+  context.response.content_length = payload.size
+  context.response.content_type = "application/json; charset=utf-8"
+  context.response.write payload
+end
+
+
 class Handler
   include HTTP::Handler
 
@@ -22,19 +41,7 @@ class Handler
 
   def call(context)
     sleep @delay
-    response_data = {
-      "time" => Time.local(),
-      "datum" => [
-        "eAcute is \u{E9}, combinedEAcute is \u{65}\u{301}; precomposed is \u{D55C}, decomposed is \u{1112}\u{1161}\u{11AB}",
-        10000000,
-        nil,
-        [0, 0.0],
-      ]
-    }
-    payload = response_data.to_json.to_slice
-    context.response.content_length = payload.size
-    context.response.content_type = "application/json; charset=utf-8"
-    context.response.write payload
+    respond_json(context, silly_data)
   end
 end
 
