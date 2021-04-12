@@ -1,3 +1,11 @@
 (executable
   (name http_hello)
-  (libraries httpaf httpaf-lwt-unix base stdio lwt lwt.unix))
+  (libraries base
+			 core
+			 stdio
+			 httpaf
+			 httpaf-lwt-unix
+			 lwt
+			 lwt.unix
+			 timezone
+			 yojson))
