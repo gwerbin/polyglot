@@ -20,6 +20,7 @@ let respond_json reqd data =
 ;;
 
 
+(* TODO: use Timere *)
 let rfc3339_now =
   let tz = (force Timezone.local) in
   let tz_str = "asdfasdfadsf why is this so difficult wtf" in
