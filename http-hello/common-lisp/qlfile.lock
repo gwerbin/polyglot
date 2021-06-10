@@ -1,0 +1,16 @@
+("quicklisp" .
+ (:class qlot/source/dist:source-dist
+  :initargs (:distribution "http://beta.quicklisp.org/dist/quicklisp.txt" :%version :latest)
+  :version "2021-05-31"))
+("cl-json" .
+ (:class qlot/source/ql:source-ql
+  :initargs (:%version :latest)
+  :version "ql-2021-05-31"))
+("cl-who" .
+ (:class qlot/source/ql:source-ql
+  :initargs (:%version :latest)
+  :version "ql-2021-05-31"))
+("hunchentoot" .
+ (:class qlot/source/ql:source-ql
+  :initargs (:%version "2021-05-31")
+  :version "ql-2021-05-31"))
