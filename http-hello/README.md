@@ -9,7 +9,7 @@ Requirements:
 * [ ] Respond to HTTP GET `/` with:
   * [ ] Sleep for 0.25 seconds.
   * [ ] Status code `200` and reason `OK`.
-  * [ ] Body containing the JSON data `{"time": "<datetime>", "datum": ["eAcute is é, combinedEAcute is é; precomposed is 한, decomposed is 한", 1, null, [0, 0.0]]}` (example taken from [the Swift book](https://docs.swift.org/swift-book/LanguageGuide/StringsAndCharacters.html))
+  * [ ] Body containing the JSON data `{"time": "<datetime>", "datum": ["eAcute is \u00E9, combinedEAcute is \u0065\u0301; precomposed is \uD55C, decomposed is \u1112\u1161\u11AB", 1, null, [0, 0.0]]}` (example taken from [the Swift book](https://docs.swift.org/swift-book/LanguageGuide/StringsAndCharacters.html))
     * [ ] The `<datetime>` should be RFC 3339 format: `YYYY-MM-DD HH:MM:SS ±HH:MM` (like ISO 8601 but with spaces and no `"T"`).
   * [ ] Provide the response header `Content-Type: application/json; charset=utf-8`.
   * [ ] Provide the response header `Content-Length: 144`.
