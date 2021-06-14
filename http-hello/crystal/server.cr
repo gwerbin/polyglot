@@ -18,10 +18,10 @@ module HttpHello
   class Handler
     include HTTP::Handler
 
-    @silly_data = {
+    @response_data = {
       "time" => Time.local(),
       "datum" => [
-        "eAcute is \u{E9}, combinedEAcute is \u{65}\u{301}; precomposed is \u{D55C}, decomposed is \u{1112}\u{1161}\u{11AB}",
+        "eAcute is \u{00E9}, combinedEAcute is \u{0065}\u{0301}; precomposed is \u{D55C}, decomposed is \u{1112}\u{1161}\u{11AB}",
         10000000,
         nil,
         [0, 0.0],
@@ -33,7 +33,7 @@ module HttpHello
 
     def call(context)
       sleep @delay
-      respond_json(context, @silly_data)
+      respond_json(context, @response_data)
     end
   end
 
